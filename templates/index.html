@@ -1,10 +1,22 @@
-<!-- Conexion con CSS -->
- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menú Principal</title>
 
+    <!-- Conexion con CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
 
-<h1>MENU PRINCIPAL</h1>
+<body>
 
-<a href="/crud">CRUD Autor / Libro / Edición / Copia</a><br>
-<a href="/usuarios">CRUD Usuario</a><br>
-<a href="/prestamos">CRUD Préstamo</a><br>
-<a href="/consultas">Consultas</a><br>
+<div class="container">
+    <h1>MENU PRINCIPAL</h1>
+
+    <a class="btn" href="/crud">CRUD Autor / Libro / Edición / Copia</a>
+    <a class="btn" href="/usuarios">CRUD Usuario</a>
+    <a class="btn" href="/prestamos">CRUD Préstamo</a>
+    <a class="btn" href="/consultas">Consultas</a>
+</div>
+
+</body>
+</html>
