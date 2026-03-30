@@ -1,182 +1,130 @@
 from flask import Flask, render_template, request, redirect
-from db import db
 from functions import *
+
+# Este archivo es el servidor de la aplicación web, se encarga de recibir las solicitudes del usuario y llamar a las funciones correspondientes para realizar las operaciones solicitadas
 
 app = Flask(__name__)
 
 # -------------------------
-# MENU PRINCIPAL
+# MENU
 # -------------------------
 @app.route("/")
 def index():
     return render_template("index.html")
 
-
 # -------------------------
-# CRUD AUTOR
+# OPCION 1 - CRUD AUTOR / LIBRO / EDICION / COPIA
 # -------------------------
 @app.route("/crud")
 def crud():
     return render_template("crud.html")
 
-autor_col = db["autor"]
-
+# -------------------------
+# AUTOR
+# -------------------------
 @app.route("/autor")
 def autor():
-    autores = list(autor_col.find())
+    autores = obtener_autores()
     return render_template("autor.html", autores=autores)
 
 @app.route("/autor/insertar", methods=["POST"])
-def insertar_autor():
-    nombre = request.form["nombre"]
-    autor_col.insert_one({"nombre": nombre})
+def insertar_autor_route():
+    insertar_autor(request.form["nombre"])
     return redirect("/autor")
 
 @app.route("/autor/actualizar", methods=["POST"])
-def actualizar_autor():
-    nombre = request.form["nombre"]
-    nuevo = request.form["nuevo"]
-
-    autor_col.update_one(
-        {"nombre": nombre},
-        {"$set": {"nombre": nuevo}}
+def actualizar_autor_route():
+    actualizar_autor(
+        request.form["nombre"],
+        request.form["nuevo"]
     )
-
     return redirect("/autor")
 
 @app.route("/autor/borrar", methods=["POST"])
-def borrar_autor():
-    nombre = request.form["nombre"]
-    autor_col.delete_one({"nombre": nombre})
+def borrar_autor_route():
+    borrar_autor(request.form["nombre"])
     return redirect("/autor")
-
-
-libro_col = db["libro"]
-
-# -------------------------
-# CRUD LIBRO
-# -------------------------
 
 @app.route("/libro")
 def libro():
-    libros = list(libro_col.find())
+    libros = obtener_libros()
     return render_template("libro.html", libros=libros)
 
 @app.route("/libro/insertar", methods=["POST"])
-def insertar_libro():
-    titulo = request.form["titulo"]
-    libro_col.insert_one({"titulo": titulo, "ediciones": []})
+def insertar_libro_route():
+    insertar_libro(request.form["titulo"])
     return redirect("/libro")
 
 @app.route("/libro/actualizar", methods=["POST"])
-def actualizar_libro():
-    titulo = request.form["titulo"]
-    nuevo = request.form["nuevo"]
-
-    libro_col.update_one(
-        {"titulo": titulo},
-        {"$set": {"titulo": nuevo}}
+def actualizar_libro_route():
+    actualizar_libro(
+        request.form["titulo"],
+        request.form["nuevo"]
     )
-
     return redirect("/libro")
 
 @app.route("/libro/borrar", methods=["POST"])
-def borrar_libro():
-    titulo = request.form["titulo"]
-    libro_col.delete_one({"titulo": titulo})
+def borrar_libro_route():
+    borrar_libro(request.form["titulo"])
     return redirect("/libro")
-
-
-
-# -------------------------
-# CRUD EDICION
-# -------------------------
 
 @app.route("/edicion")
 def edicion():
-    libros = list(libro_col.find())
+    libros = obtener_libros()
     return render_template("edicion.html", libros=libros)
 
 @app.route("/edicion/insertar", methods=["POST"])
-def insertar_edicion():
-    titulo = request.form["titulo"]
-    isbn = request.form["isbn"]
-    año = request.form["anio"]
-    idioma = request.form["idioma"]
-
-    libro_col.update_one(
-        {"titulo": titulo},
-        {
-            "$push": {
-                "ediciones": {
-                    "ISBN": isbn,
-                    "año": año,
-                    "idioma": idioma,
-                    "copias": []
-                }
-            }
-        }
+def insertar_edicion_route():
+    insertar_edicion(
+        request.form["titulo"],
+        request.form["isbn"],
+        request.form["anio"],
+        request.form["idioma"]
     )
-
     return redirect("/edicion")
-
-# -------------------------
-# CRUD COPIA
-# -------------------------
 
 @app.route("/copia")
 def copia():
-    libros = list(libro_col.find())
+    libros = obtener_libros()
     return render_template("copia.html", libros=libros)
 
 @app.route("/copia/insertar", methods=["POST"])
-def insertar_copia():
-    titulo = request.form["titulo"]
-    isbn = request.form["isbn"]
-    numero = int(request.form["numero"])
-
-    libro_col.update_one(
-        {
-            "titulo": titulo,
-            "ediciones.ISBN": isbn
-        },
-        {
-            "$push": {
-                "ediciones.$.copias": {
-                    "numero": numero
-                }
-            }
-        }
+def insertar_copia_route():
+    insertar_copia(
+        request.form["titulo"],
+        request.form["isbn"],
+        int(request.form["numero"])
     )
-
     return redirect("/copia")
 
-# -------------------------
-# ESTRUCTURA RESTANTE
-# -------------------------
+
+
+
 
 # -------------------------
-# CRUD usuario
+# OPCION 2 - USUARIOS
 # -------------------------
 @app.route("/usuarios")
 def usuarios():
-    return "CRUD USUARIOS (pendiente)"
+    return "CRUD USUARIO (pendiente)"
+
+
+
 
 
 # -------------------------
-# CRUD Prestamo
+# OPCION 3 - PRESTAMOS
 # -------------------------
 @app.route("/prestamos")
 def prestamos():
-    return "CRUD PRESTAMOS (pendiente)"
+    return "CRUD PRESTAMO (pendiente)"
 
+
+
+
+
+    # -------------------------
+# EJECUTAR
 # -------------------------
-# CRUD CONSULTAS
-# -------------------------
-@app.route("/consultas")
-def consultas():
-    return "CONSULTAS (pendiente)"
-
-
 if __name__ == "__main__":
     app.run(debug=True)

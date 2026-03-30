@@ -1,5 +1,5 @@
 from db import db
-from functions import *
+from functions_consola import *
 
 # Colecciones
 libro_col = db["libro"]
