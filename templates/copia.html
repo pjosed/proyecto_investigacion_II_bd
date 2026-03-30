@@ -1,10 +1,23 @@
-<h2>COPIA</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Copia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
 
-<form action="/copia/insertar" method="post">
-    <input type="text" name="titulo" placeholder="Libro">
-    <input type="text" name="isbn" placeholder="ISBN">
-    <input type="number" name="numero" placeholder="Numero copia">
-    <button type="submit">Insertar</button>
-</form>
+<div class="container">
+    <h2>COPIA</h2>
 
-<a href="/crud">Volver</a>
+    <form action="/copia/insertar" method="post">
+        <input type="text" name="titulo" placeholder="Libro">
+        <input type="text" name="isbn" placeholder="ISBN">
+        <input type="number" name="numero" placeholder="Número copia">
+        <button type="submit">Insertar</button>
+    </form>
+
+    <a class="btn back-btn" href="/crud">Volver</a>
+</div>
+
+</body>
+</html>

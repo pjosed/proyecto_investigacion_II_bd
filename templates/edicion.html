@@ -1,18 +1,31 @@
-<h2>EDICION</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edición</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
 
-<form action="/edicion/insertar" method="post">
-    <input type="text" name="titulo" placeholder="Libro">
-    <input type="text" name="isbn" placeholder="ISBN">
-    <input type="text" name="anio" placeholder="Año">
-    <input type="text" name="idioma" placeholder="Idioma">
-    <button type="submit">Insertar</button>
-</form>
+<div class="container">
+    <h2>EDICIÓN</h2>
 
-<h3>Libros existentes</h3>
-<ul>
-{% for libro in libros %}
-<li>{{ libro.titulo }}</li>
-{% endfor %}
-</ul>
+    <form action="/edicion/insertar" method="post">
+        <input type="text" name="titulo" placeholder="Libro">
+        <input type="text" name="isbn" placeholder="ISBN">
+        <input type="text" name="anio" placeholder="Año">
+        <input type="text" name="idioma" placeholder="Idioma">
+        <button type="submit">Insertar</button>
+    </form>
 
-<a href="/crud">Volver</a>
+    <h3>Libros existentes:</h3>
+    <ul>
+        {% for libro in libros %}
+            <li>{{ libro.titulo }}</li>
+        {% endfor %}
+    </ul>
+
+    <a class="btn back-btn" href="/crud">Volver</a>
+</div>
+
+</body>
+</html>

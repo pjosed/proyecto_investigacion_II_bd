@@ -1,25 +1,44 @@
-<h2>LIBROS</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Libros</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
 
-<form action="/libro/insertar" method="post">
-    <input type="text" name="titulo" placeholder="Titulo">
-    <button type="submit">Insertar</button>
-</form>
+<div class="container">
+    <h2>LIBROS</h2>
 
-<form action="/libro/actualizar" method="post">
-    <input type="text" name="titulo" placeholder="Titulo actual">
-    <input type="text" name="nuevo" placeholder="Nuevo titulo">
-    <button type="submit">Actualizar</button>
-</form>
+    <!-- Formulario Insertar -->
+    <form action="/libro/insertar" method="post">
+        <input type="text" name="titulo" placeholder="Título">
+        <button type="submit">Insertar</button>
+    </form>
 
-<form action="/libro/borrar" method="post">
-    <input type="text" name="titulo" placeholder="Titulo">
-    <button type="submit">Borrar</button>
-</form>
+    <!-- Formulario Actualizar -->
+    <form action="/libro/actualizar" method="post">
+        <input type="text" name="titulo" placeholder="Título actual">
+        <input type="text" name="nuevo" placeholder="Nuevo título">
+        <button type="submit">Actualizar</button>
+    </form>
 
-<ul>
-{% for libro in libros %}
-<li>{{ libro.titulo }}</li>
-{% endfor %}
-</ul>
+    <!-- Formulario Borrar -->
+    <form action="/libro/borrar" method="post">
+        <input type="text" name="titulo" placeholder="Título">
+        <button type="submit">Borrar</button>
+    </form>
 
-<a href="/crud">Volver</a>
+    <!-- Lista de libros -->
+    <h3>Lista de libros:</h3>
+    <ul>
+        {% for libro in libros %}
+            <li>{{ libro.titulo }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Botón Volver -->
+    <a class="btn back-btn" href="/crud">Volver</a>
+</div>
+
+</body>
+</html>

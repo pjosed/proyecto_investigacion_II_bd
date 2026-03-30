@@ -1,26 +1,37 @@
-<h2>AUTORES</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Autores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<div class="container">
+    <h2>AUTORES</h2>
 
-<form action="/autor/insertar" method="post">
-    <input type="text" name="nombre" placeholder="Nombre">
-    <button type="submit">Insertar</button>
-</form>
+    <form action="/autor/insertar" method="post">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <button type="submit">Insertar</button>
+    </form>
 
-<form action="/autor/actualizar" method="post">
-    <input type="text" name="nombre" placeholder="Nombre actual">
-    <input type="text" name="nuevo" placeholder="Nuevo nombre">
-    <button type="submit">Actualizar</button>
-</form>
+    <form action="/autor/actualizar" method="post">
+        <input type="text" name="nombre" placeholder="Nombre actual">
+        <input type="text" name="nuevo" placeholder="Nuevo nombre">
+        <button type="submit">Actualizar</button>
+    </form>
 
-<form action="/autor/borrar" method="post">
-    <input type="text" name="nombre" placeholder="Nombre">
-    <button type="submit">Borrar</button>
-</form>
+    <form action="/autor/borrar" method="post">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <button type="submit">Borrar</button>
+    </form>
 
-<h3>Lista:</h3>
-<ul>
-{% for autor in autores %}
-    <li>{{ autor.nombre }}</li>
-{% endfor %}
-</ul>
+    <h3>Lista:</h3>
+    <ul>
+        {% for autor in autores %}
+            <li>{{ autor.nombre }}</li>
+        {% endfor %}
+    </ul>
 
-<a href="/crud">Volver</a>
+    <a class="btn back-btn" href="/crud">Volver</a>
+</div>
+</body>
+</html>
