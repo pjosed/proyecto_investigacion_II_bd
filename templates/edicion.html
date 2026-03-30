@@ -1,0 +1,18 @@
+<h2>EDICION</h2>
+
+<form action="/edicion/insertar" method="post">
+    <input type="text" name="titulo" placeholder="Libro">
+    <input type="text" name="isbn" placeholder="ISBN">
+    <input type="text" name="anio" placeholder="Año">
+    <input type="text" name="idioma" placeholder="Idioma">
+    <button type="submit">Insertar</button>
+</form>
+
+<h3>Libros existentes</h3>
+<ul>
+{% for libro in libros %}
+<li>{{ libro.titulo }}</li>
+{% endfor %}
+</ul>
+
+<a href="/crud">Volver</a>

@@ -1,0 +1,25 @@
+<h2>LIBROS</h2>
+
+<form action="/libro/insertar" method="post">
+    <input type="text" name="titulo" placeholder="Titulo">
+    <button type="submit">Insertar</button>
+</form>
+
+<form action="/libro/actualizar" method="post">
+    <input type="text" name="titulo" placeholder="Titulo actual">
+    <input type="text" name="nuevo" placeholder="Nuevo titulo">
+    <button type="submit">Actualizar</button>
+</form>
+
+<form action="/libro/borrar" method="post">
+    <input type="text" name="titulo" placeholder="Titulo">
+    <button type="submit">Borrar</button>
+</form>
+
+<ul>
+{% for libro in libros %}
+<li>{{ libro.titulo }}</li>
+{% endfor %}
+</ul>
+
+<a href="/crud">Volver</a>
