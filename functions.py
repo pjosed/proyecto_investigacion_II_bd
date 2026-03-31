@@ -5,7 +5,7 @@ from db import db
 
 autor_col = db["autor"]
 libro_col = db["libro"]
-
+usuario_col = db["usuario"]
 # ---------------- AUTOR ----------------
 
 def obtener_autores():
@@ -76,3 +76,20 @@ def insertar_copia(titulo, isbn, numero):
             }
         }
     )
+
+# ---------------- USUARIO ----------------
+
+def obtener_usuarios():
+    return list(usuario_col.find())
+
+def insertar_usuario(rut, nombre):
+    usuario_col.insert_one({"rut": rut, "nombre": nombre})
+
+def actualizar_usuario(rut, nuevo):
+    usuario_col.update_one(
+        {"rut": rut},
+        {"$set": {"nombre": nuevo}}
+    )
+
+def borrar_usuario(rut):
+    usuario_col.delete_one({"RUT": rut})

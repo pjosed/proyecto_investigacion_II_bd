@@ -105,7 +105,26 @@ def insertar_copia_route():
 # -------------------------
 @app.route("/usuarios")
 def usuarios():
-    return "CRUD USUARIO (pendiente)"
+    usuarios = obtener_usuarios()
+    return render_template("usuarios.html", usuarios=usuarios)
+
+@app.route("/usuarios/insertar", methods=["POST"])
+def insertar_usuario_route():
+    insertar_usuario(request.form["rut"], request.form["nombre"])
+    return redirect("/usuarios")
+
+@app.route("/usuarios/actualizar", methods=["POST"])
+def actualizar_usuario_route():
+    actualizar_usuario  (request.form["rut"], request.form["nuevo"])
+    return redirect("/usuarios")
+
+@app.route("/usuarios/borrar", methods=["POST"])
+def borrar_usuario_route():
+    borrar_usuario(request.form["rut"])
+    return redirect("/usuarios")
+
+
+
 
 
 
