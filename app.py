@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect
 from functions import *
-
 # Este archivo es el servidor de la aplicación web, se encarga de recibir las solicitudes del usuario y llamar a las funciones correspondientes para realizar las operaciones solicitadas
 
 app = Flask(__name__)

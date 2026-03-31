@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>USUARIOS</h2>
+
+    <form action="/usuarios/insertar" method="post">
+        <input type="text" name="rut" placeholder="RUT">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <button type="submit">Insertar</button>
+    </form>
+
+    <form action="/usuarios/actualizar" method="post">
+        <input type="text" name="rut" placeholder="RUT actual">
+        <input type="text" name="nuevo" placeholder="Nuevo nombre">
+        <button type="submit">Actualizar</button>
+    </form>
+
+    <form action="/usuarios/borrar" method="post">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <button type="submit">Borrar</button>
+    </form>
+
+    <h3>Lista:</h3>
+    <ul>
+        {% for usuario in usuarios %}
+            <li>{{ usuario.nombre }}</li>
+        {% endfor %}
+    </ul>
+
+    <a class="btn back-btn" href="/crud">Volver</a>
+    
+</body>
+</html>

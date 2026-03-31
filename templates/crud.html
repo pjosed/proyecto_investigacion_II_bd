@@ -1,22 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>CRUD Autor / Libro / Edición / Copia</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Mismo estilo que el index.html, se reutiliza el mismo CSS para mantener la coherencia visual. -->
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <!-- Mismo estilo que el index.html, se reutiliza el mismo CSS para mantener la coherencia visual. -->
+  </head>
 
-<body>
+  <body>
+    <div class="container">
+      <h2>CRUD AUTOR / LIBRO / EDICIÓN / COPIA</h2>
 
-<div class="container">
-    <h2>CRUD AUTOR / LIBRO / EDICIÓN / COPIA</h2>
+      <a class="btn" href="/autor">Autor</a>
+      <a class="btn" href="/libro">Libro</a>
+      <a class="btn" href="/edicion">Edición</a>
+      <a class="btn" href="/copia">Copia</a>
 
-    <a class="btn" href="/autor">Autor</a>
-    <a class="btn" href="/libro">Libro</a>
-    <a class="btn" href="/edicion">Edición</a>
-    <a class="btn" href="/copia">Copia</a>
-
-    <a class="btn back-btn" href="/">Volver</a>
-</div>
-
-</body>
+      <a class="btn back-btn" href="/">Volver</a>
+    </div>
+  </body>
 </html>
