@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> CONSULTA#1</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+<body>
+    <div class="header">   
+        <h1>Primera Consulta</h1>
+    </div>
+    <h3>Esta consulta muestra un listado de las copias de libros encontrados</h3>
+    <div class="container">
+        {%for c in copias%}
+            <p>
+                Autor: {{ c.autor }} |
+                Libro: {{ c.libro }} |
+                Edición: {{ c.edicion }} |
+                Copia: {{ c.copia }}
+            </p>
+        {%endfor%}
+        <br><br>
+        <a class="btn back-btn" href="/consultas">Volver</a>
+    </div>
+</body>    
+</html>

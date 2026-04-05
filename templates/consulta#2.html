@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> CONSULTA#2</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+<body>
+    <div class="header">   
+        <h1>Segunda Consulta</h1>
+    </div>
+    <div class="container">
+        <h3> Ingrese el RUT del usuario para buscar los préstamos realizados:</h3>
+        <form method="POST">
+            <input name="rut" placeholder="Ingrese RUT">
+            <button type="submit">Buscar</button>
+        </form>
+        {%if prestamos%}
+        {%for p in prestamos%}
+            <p>
+                Libro: {{ p }}
+            </p>
+        {%endfor%}
+        {%endif%}
+        <br><br>
+        <a class="btn back-btn" href="/consultas">Volver</a>
+    </div>
+</body>
+
+
+</html>

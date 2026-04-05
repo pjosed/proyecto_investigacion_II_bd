@@ -3,9 +3,10 @@ from db import db
 
 #Este archivo hace operaciones con la base de datos y es llamado por el app.py para realizar las operaciones solicitadas por el usuario
 
-autor_col = db["autor"]
-libro_col = db["libro"]
-usuario_col = db["usuario"]
+autor_col = db["autores"]
+libro_col = db["libros"]
+usuario_col = db["usuarios"]
+prestamo_col = db["prestamos"]
 # ---------------- AUTOR ----------------
 
 def obtener_autores():
@@ -77,6 +78,25 @@ def insertar_copia(titulo, isbn, numero):
         }
     )
 
+def obtener_copias_libros():
+    todas_copias = []
+    
+    for libro in libro_col.find():
+        titulo = libro.get("titulo") 
+        autor_doc = autor_col.find_one({"libros": titulo})
+        autor = autor_doc["nombre"] 
+
+        for ed in libro.get("ediciones",[]):
+            isbn = ed.get("ISBN")
+
+            for copia in ed.get("copias", []):
+                todas_copias.append({
+                    "autor": autor,
+                    "libro": titulo,
+                    "edicion": isbn,
+                    "copia": copia.get("numero")
+                })
+    return todas_copias
 # ---------------- USUARIO ----------------
 
 def obtener_usuarios():
@@ -94,39 +114,12 @@ def actualizar_usuario(rut, nuevo):
 def borrar_usuario(rut):
     usuario_col.delete_one({"RUT": rut})
 
-# ---------------- PRESTAMO ----------------
-prestamo_col = db["prestamo"]
-
-def obtener_prestamos():
-    return list(prestamo_col.find())
-
-def insertar_prestamo(rut, isbn, numero_copia, fecha_prestamo, fecha_devolucion=None):
-    prestamo_col.insert_one({
-        "RUT_usuario": rut,
-        "ISBN": isbn,
-        "numero_copia": int(numero_copia),
-        "fecha_prestamo": fecha_prestamo,
-        "fecha_devolucion": None
-    })
-
-def actualizar_prestamo(rut, isbn, numero_copia,fecha_prestamo, fecha_devolucion):
-    prestamo_col.update_one(
-        {
-            "RUT_usuario": rut,
-            "ISBN": isbn,
-            "numero_copia": int(numero_copia)
-        },
-        {
-            "$set": {"fecha_prestamo": fecha_prestamo,"fecha_devolucion": fecha_devolucion}
-        }
-    )
-
-def borrar_prestamo(rut, isbn, numero_copia):
-    prestamo_col.delete_one(
-        {
-            "RUT_usuario": rut,
-            "ISBN": isbn,
-            "numero_copia": int(numero_copia)
-        }
-    )
+def obtener_prestamos_lib(rut):
+    list_prestamos = []
     
+    for prestamo in prestamo_col.find({"RUT_usuario": rut}):
+         isbn = prestamo.get("ISBN")
+         libro_doc = libro_col.find_one({"ediciones.ISBN": isbn})
+         list_prestamos.append(libro_doc["titulo"])
+   
+    return list_prestamos

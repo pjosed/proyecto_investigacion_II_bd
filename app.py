@@ -169,11 +169,30 @@ def borrar_prestamo_route():
     return redirect("/prestamos")
 
 
-
-
-
-
-    # -------------------------
+# -------------------------
+# OPCION 4 - CONSULTAS
+# -------------------------
+@app.route("/consultas")
+def consultas():
+    return render_template("consultas.html")
+# -------------------------
+# CONSULTA#1
+# -------------------------
+@app.route("/primer-cnslt")
+def consulta1():
+    copias = obtener_copias_libros()
+    return render_template("consulta#1.html", copias=copias)
+# -------------------------
+# CONSULTA#2
+# -------------------------
+@app.route("/segunda-cnslt",methods=["GET", "POST"])
+def consulta2():
+    if request.method == "POST":
+        rut = request.form["rut"]
+        prestamos = obtener_prestamos_lib(rut)
+        return render_template("consulta#2.html", prestamos=prestamos)
+    return render_template("consulta#2.html")
+# -------------------------
 # EJECUTAR
 # -------------------------
 if __name__ == "__main__":
