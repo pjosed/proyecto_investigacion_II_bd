@@ -135,7 +135,39 @@ def borrar_usuario_route():
 # -------------------------
 @app.route("/prestamos")
 def prestamos():
-    return "CRUD PRESTAMO (pendiente)"
+    prestamos = obtener_prestamos()
+    return render_template("prestamos.html", prestamos=prestamos)   
+    
+@app.route("/prestamos/insertar", methods=["POST"])
+def insertar_prestamo_route():
+    insertar_prestamo(
+        request.form["rut"],
+        request.form["isbn"],
+        request.form["numero_copia"],
+        request.form["fecha_prestamo"]
+    )
+    return redirect("/prestamos")
+
+@app.route("/prestamos/actualizar", methods=["POST"])
+def actualizar_prestamo_route():
+    actualizar_prestamo(
+        request.form["rut"],
+        request.form["isbn"],
+        request.form["numero_copia"],
+        request.form["fecha_prestamo"],
+        request.form["fecha_devolucion"]
+    )
+    return redirect("/prestamos")
+
+@app.route("/prestamos/borrar", methods=["POST"])
+def borrar_prestamo_route():
+    borrar_prestamo(
+        request.form["rut"],
+        request.form["isbn"],
+        request.form["numero_copia"]
+    )
+    return redirect("/prestamos")
+
 
 # -------------------------
 # OPCION 4 - CONSULTAS

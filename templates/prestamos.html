@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Préstamos</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>PRÉSTAMOS</h2>
+
+      <form action="/prestamos/insertar" method="post">
+        <input type="text" name="rut" placeholder="RUT usuario" />
+        <input type="text" name="isbn" placeholder="ISBN" />
+        <input
+          type="number"
+          name="numero_copia"
+          placeholder="Número de copia"
+        />
+        <input type="date" name="fecha_prestamo" />
+        <button type="submit">Insertar</button>
+      </form>
+
+      <form action="/prestamos/actualizar" method="post">
+        <input type="text" name="rut" placeholder="RUT usuario" />
+        <input type="text" name="isbn" placeholder="ISBN" />
+        <input
+          type="number"
+          name="numero_copia"
+          placeholder="Número de copia"
+        />
+        <input type="date" name="fecha_prestamo" />
+        <input type="date" name="fecha_devolucion" />
+        <button type="submit">Actualizar</button>
+      </form>
+
+      <form action="/prestamos/borrar" method="post">
+        <input type="text" name="rut" placeholder="RUT usuario" />
+        <input type="text" name="isbn" placeholder="ISBN" />
+        <input
+          type="number"
+          name="numero_copia"
+          placeholder="Número de copia"
+        />
+        <button type="submit">Borrar</button>
+      </form>
+
+      <h3>Lista de préstamos:</h3>
+      <ul>
+        {% for prestamo in prestamos %}
+        <li>
+          {{ prestamo.RUT_usuario }} - {{ prestamo.ISBN }} - Copia {{
+          prestamo.numero_copia }} | {{ prestamo.fecha_prestamo }} → {{
+          prestamo.fecha_devolucion or "Sin devolver" }}
+        </li>
+        {% endfor %}
+      </ul>
+
+      <a class="btn back-btn" href="/">Volver</a>
+    </div>
+  </body>
+</html>
