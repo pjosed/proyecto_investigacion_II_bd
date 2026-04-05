@@ -114,7 +114,7 @@ def actualizar_usuario(rut, nuevo):
 def borrar_usuario(rut):
     usuario_col.delete_one({"RUT": rut})
 
-def obtener_prestamos(rut):
+def obtener_prestamos_lib(rut):
     list_prestamos = []
     
     for prestamo in prestamo_col.find({"RUT_usuario": rut}):

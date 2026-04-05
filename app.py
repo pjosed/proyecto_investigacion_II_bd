@@ -157,7 +157,7 @@ def consulta1():
 def consulta2():
     if request.method == "POST":
         rut = request.form["rut"]
-        prestamos = obtener_prestamos(rut)
+        prestamos = obtener_prestamos_lib(rut)
         return render_template("consulta#2.html", prestamos=prestamos)
     return render_template("consulta#2.html")
 # -------------------------
