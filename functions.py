@@ -123,3 +123,40 @@ def obtener_prestamos_lib(rut):
          list_prestamos.append(libro_doc["titulo"])
    
     return list_prestamos
+
+
+# ---------------- PRESTAMO ----------------
+prestamo_col = db["prestamo"]
+
+def obtener_prestamos():
+    return list(prestamo_col.find())
+
+def insertar_prestamo(rut, isbn, numero_copia, fecha_prestamo, fecha_devolucion=None):
+    prestamo_col.insert_one({
+        "RUT_usuario": rut,
+        "ISBN": isbn,
+        "numero_copia": int(numero_copia),
+        "fecha_prestamo": fecha_prestamo,
+        "fecha_devolucion": None
+    })
+
+def actualizar_prestamo(rut, isbn, numero_copia,fecha_prestamo, fecha_devolucion):
+    prestamo_col.update_one(
+        {
+            "RUT_usuario": rut,
+            "ISBN": isbn,
+            "numero_copia": int(numero_copia)
+        },
+        {
+            "$set": {"fecha_prestamo": fecha_prestamo,"fecha_devolucion": fecha_devolucion}
+        }
+    )
+
+def borrar_prestamo(rut, isbn, numero_copia):
+    prestamo_col.delete_one(
+        {
+            "RUT_usuario": rut,
+            "ISBN": isbn,
+            "numero_copia": int(numero_copia)
+        }
+    )
